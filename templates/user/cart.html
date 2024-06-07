@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    {% if not cart_items %}
+    <p>Your cart is empty</p>
+
+    {% else %}
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Book Name</th>
+            <th scope="col">Author</th>
+            <th scope="col">price</th>
+            <th scope="col">Action</th>
+            <th scope="col">Action</th>
+            <th scope="col">Action</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for item in cart_items %}
+          <tr>
+            <th scope="row">1</th>
+            <td>{{ item.book.title }}</td>
+            <td>{{ item.book.author }}</td>
+            <td>{{ item.book.price }}</td>
+            <td><a href="{% url 'remove_cart' item.id %}" class="btn btn-primary">Remove</a></td>
+
+            {% if item.quantity  <= item.book.quantity %}
+
+            <td><a href="{% url 'decrease_quantity' item.id %}" >-</a></td>
+            <td><input type="number" name="quantity" value="{{ item.quantity }}">Quantity</td>
+            <td><a href="{% url 'increase_quantity' item.id %}" >+</a></td>
+
+          </tr>
+          {% endif %}
+          {% endfor %}
+          </tbody>
+          </table>
+          <form action="{% url 'create-checkout-session' %}" method="post">
+           {% csrf_token %}
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h6 class="card-title">Total Products : {{ total_items }}</h6>
+              <h5 class="card-subtitle mb-2 text-muted">Total Price : {{ total_price }}</h5>
+              <button id="checkout-button" type="submit" class="card-link">checkout</button>
+            </div>
+          </div>
+        </form>
+
+          {% endif %}
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+{% extends 'admin/index.html' %}
+  {% load static %}
+  
+  
+  {% block content %}
+
+
+
+<h1>Details of Books </h1>
+
+{% for books in book %}
+
+<div class="container-fluid mb-4">
+    <div class="row justify-content-center col-lg-12">
+      <div class="col md-4">
+         <div class="card" style="width: 18rem;">
+            <img src="{{ books.image.url }}" class="card-img-top h-15" alt="..." >
+              <div class="card-body">
+                <p>{{ books.title }}</p>
+                <p>{{ books.price }}</p>
+                <a href="#" class="btn btn-primary">View</a>
+
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+{% endfor %}
+
+{% endblock %}
+
+

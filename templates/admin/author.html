@@ -1,0 +1,17 @@
+{% extends 'admin/index.html' %}
+  {% load static %}
+  
+  
+  {% block content %}
+<h1 class="text-center">Create Author</h1>
+    <form action="" method="post">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <input type="submit" value="save" class="btn btn-success">
+
+
+    </form>
+{% endblock %}
